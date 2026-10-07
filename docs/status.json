@@ -1,13 +1,23 @@
 {
  "size": "10",
- "updated": "2026-10-07T05:25:01Z",
+ "offers_as_of": "2026-10-07",
+ "card_pct": {
+  "axis": 0.1,
+  "flipkart_axis": 0.05
+ },
+ "updated": "2026-10-07T06:44:24Z",
  "items": [
   {
-   "name": "Puma Palermo (blue)",
+   "name": "Puma Palermo (Sea Illusion-Buttercream)",
    "budget": "3.5k",
+   "offers": {
+    "coupon": 1190,
+    "coin_off": 500,
+    "coin_cost": 50
+   },
    "short_url": "https://dl.flipkart.com/s/X7ZcDWNNNN",
-   "url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itm28fd02396b78f?pid=SHOHQ7Z3KHGFZZEW&marketplace=FLIPKART",
-   "checked": "2026-10-07T05:24:39Z",
+   "url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itm28fd02396b78f?pid=SHOHQ7Z3WG8WXEWM&marketplace=FLIPKART",
+   "checked": "2026-10-07T06:43:49Z",
    "title": "PUMA Palermo Sneakers For Men",
    "sizes": {
     "6": false,
@@ -20,14 +30,26 @@
     "13": false
    },
    "in_stock": false,
-   "error": null
+   "error": null,
+   "price": 5949,
+   "mrp": 6999,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/d/d/g/4-396463-4-0-puma-sea-illusion-buttercream-original-imahq7yuztsykyeg.jpeg",
+   "photos": [
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_043d650698934fe2a7f9e791ea04e611.jpg?q=80"
+   ],
+   "photos_ts": 1791355431.698438
   },
   {
-   "name": "Puma Club II Era (white/pink)",
+   "name": "Puma Club II Era (white)",
    "budget": "1.6k",
+   "offers": {
+    "coupon": 110,
+    "coin_off": 100,
+    "coin_cost": 100
+   },
    "short_url": "https://dl.flipkart.com/s/Fz3HKeuuuN",
-   "url": "https://www.flipkart.com/puma-club-ii-era-sneakers-men/p/itmb8e43e09c199f?pid=SHOHJSH4Y8RVWQS6&marketplace=FLIPKART",
-   "checked": "2026-10-07T05:24:43Z",
+   "url": "https://www.flipkart.com/puma-club-ii-era-sneakers-men/p/itmb8e43e09c199f?pid=SHOHJSH4JV6CP64F&marketplace=FLIPKART",
+   "checked": "2026-10-07T06:43:54Z",
    "title": "PUMA Club II Era Sneakers For Men",
    "sizes": {
     "6": false,
@@ -39,14 +61,31 @@
     "12": false
    },
    "in_stock": false,
-   "error": null
+   "error": null,
+   "price": 2199,
+   "mrp": 5499,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/u/x/g/-watermarked-original-imahmgpgku5xfbub.jpeg",
+   "photos": [
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_9f64d58bc529482ea037497d72501e94.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_7da7b2c0e8b74f7daec3ef57c5be0e8e.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_b7771e2f21554e27b96b6dda3bc28590.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_e919032b1237489db3eafe23b4217b76.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_4234380db57340d9a0a37d0832fafd49.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_4327b318bfda4e93a99cbb1ebda01b7a.jpg?q=80"
+   ],
+   "photos_ts": 1791355436.561579
   },
   {
-   "name": "Puma RX 737 (red/maroon)",
+   "name": "Puma RX 737 Vintage Update (red)",
    "budget": "1.8k",
+   "offers": {
+    "coupon": 120,
+    "coin_off": 100,
+    "coin_cost": 100
+   },
    "short_url": "https://dl.flipkart.com/s/Fz615CuuuN",
    "url": "https://www.flipkart.com/puma-rx-737-vintage-update-sneakers-men/p/itm6d095691f0d0c?pid=SHOHDNRZNNGH8QVU&marketplace=FLIPKART",
-   "checked": "2026-10-07T05:24:47Z",
+   "checked": "2026-10-07T06:43:59Z",
    "title": "PUMA RX 737 Vintage Update Sneakers For Men",
    "sizes": {
     "6": false,
@@ -58,14 +97,31 @@
     "12": false
    },
    "in_stock": false,
-   "error": null
+   "error": null,
+   "price": 2399,
+   "mrp": 7999,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/o/k/q/-watermarked-original-imahgapyj3fzs2rs.jpeg",
+   "photos": [
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_e8a0acc9f82e40ffa231ce4760808741.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_84d0c9f24e0448aea78196b628729d69.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_6d274709712948cf920a620dd77fc757.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_f7289647463d4e2f9361e439db2c2b39.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_c610f77c2e9842f49b9edf3663dd7b94.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_1f2ce2553dc2440e86bcd4d1c5e853ee.jpg?q=80"
+   ],
+   "photos_ts": 1791355441.1448011
   },
   {
-   "name": "Puma 9-T (synthetic leather)",
+   "name": "Puma 9-T (white, synthetic leather)",
    "budget": "1.8k",
+   "offers": {
+    "coupon": 120,
+    "coin_off": 100,
+    "coin_cost": 100
+   },
    "short_url": "https://dl.flipkart.com/s/Fln!ySuuuN",
    "url": "https://www.flipkart.com/puma-9-t-sneakers-men/p/itm71907c09ea454?pid=SHOHJZ8BPCY6YTBQ&marketplace=FLIPKART",
-   "checked": "2026-10-07T05:24:51Z",
+   "checked": "2026-10-07T06:44:04Z",
    "title": "PUMA 9-T Sneakers For Men",
    "sizes": {
     "6": false,
@@ -84,21 +140,38 @@
     "13": false
    },
    "in_stock": true,
-   "error": null
+   "error": null,
+   "price": 2399,
+   "mrp": 5999,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/e/9/3/-watermarked-original-imahhpsqzmkwdazf.jpeg",
+   "photos": [
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_838710f0cdc34bdd8ecbee6ab2f6bb32.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_10ca7477170747b48082a0fb2dfea110.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_6d98cea5787f4c7a987e3f9d7c208620.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_41c238fe732040ee9649114c7d129ab5.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_7af6dc469a124e6b90b05a09063a6714.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_8560c3e9c8214c16b37988dac732cd93.jpg?q=80"
+   ],
+   "photos_ts": 1791355446.0941281
   },
   {
-   "name": "Puma ST Runner v4 (white/green)",
+   "name": "Puma ST Runner v4 (vapor gray/green, gum)",
    "budget": "2k",
-   "short_url": "https://dl.flipkart.com/s/XWL_t5NNNN",
+   "offers": {
+    "coupon": 130,
+    "coin_off": 100,
+    "coin_cost": 100
+   },
+   "short_url": "https://dl.flipkart.com/s/GS9s!PuuuN",
    "url": "https://www.flipkart.com/puma-st-runner-v4-mesh-sneakers-men/p/itmc3c62b7aa07eb?pid=SHOHJZ8BNYF44WSA&marketplace=FLIPKART",
-   "checked": "2026-10-07T05:24:57Z",
+   "checked": "2026-10-07T06:44:09Z",
    "title": "PUMA ST Runner v4 Mesh Sneakers For Men",
    "sizes": {
     "6": false,
     "6.5": false,
     "7": false,
     "7.5": false,
-    "8": true,
+    "8": false,
     "8.5": false,
     "9": true,
     "9.5": false,
@@ -109,7 +182,91 @@
     "13": false
    },
    "in_stock": true,
-   "error": null
+   "error": null,
+   "price": 2599,
+   "mrp": 6499,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/f/d/w/-watermarked-original-imahnsbrzxbwwyjs.jpeg",
+   "photos": [
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_9bbf58722f524b7dbd28bcdadf00525f.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_7b7460a466614c59804307e429fc5598.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_905d9cb06ae647a2bc908a7745565e60.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_708d4bcd7034453f940eb2da47a0f069.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_6adc01576b4f414b98102b412562c91d.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_d1b98814b11547b9afa4479e7149615a.jpg?q=80"
+   ],
+   "photos_ts": 1791355450.971761
+  },
+  {
+   "name": "Puma Palermo (green)",
+   "budget": null,
+   "offers": {
+    "coupon": 0,
+    "coin_off": 100,
+    "coin_cost": 100
+   },
+   "short_url": "https://dl.flipkart.com/s/1XX1imNNNN",
+   "url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itmb0dd4aebdbc02?pid=SHOHCFHGNF3CRDXQ&marketplace=FLIPKART",
+   "checked": "2026-10-07T06:44:13Z",
+   "title": "PUMA Palermo Sneakers For Men",
+   "sizes": {
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": true,
+    "7": true,
+    "8": true,
+    "9": false,
+    "10": false,
+    "11": false,
+    "12": false,
+    "13": false
+   },
+   "in_stock": false,
+   "error": null,
+   "price": 4899,
+   "mrp": 6999,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/o/j/l/-watermarked-original-imahgczjvwnyeczd.jpeg",
+   "photos": [
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_88d3a6d7cd9d43f68221e898db43648d.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_d2ac9b39ce2e45deb09db7db4cd216b8.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_ca2fbb4c882940e59ee7edec885496de.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_876b6c34324143baa85c4d4fd43f9367.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_708789c27ae3445286f6176dfc974fc8.jpg?q=80",
+    "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_e1388f81a3774ab899ba3965fe5ab3fb.jpg?q=80"
+   ],
+   "photos_ts": 1791355456.539604
+  },
+  {
+   "name": "Puma Palermo Supertifo (purple)",
+   "budget": null,
+   "offers": {
+    "coupon": 1200,
+    "coin_off": 500,
+    "coin_cost": 50
+   },
+   "short_url": "https://dl.flipkart.com/s/GFpqZSuuuN",
+   "url": "https://www.flipkart.com/puma-palermo-supertifo-sneakers-men/p/itm1b6a0f89b4e3f?pid=SHOH8Y2QN7M8KPM3&marketplace=FLIPKART",
+   "checked": "2026-10-07T06:44:19Z",
+   "title": "PUMA Palermo Supertifo Sneakers For Men",
+   "sizes": {
+    "3": true,
+    "4": true,
+    "5": true,
+    "6": false,
+    "7": false,
+    "8": false,
+    "9": false,
+    "10": false,
+    "11": false,
+    "12": true
+   },
+   "in_stock": false,
+   "error": null,
+   "price": 5999,
+   "mrp": 7999,
+   "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/w/4/s/-watermarked-original-imahg3udyc82jujh.jpeg",
+   "photos": [],
+   "photos_ts": 1791355461.166272
   }
  ]
 }

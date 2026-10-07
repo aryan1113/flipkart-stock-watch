@@ -4,68 +4,113 @@
 <style>
 :root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--card:#f6f6f7;--ok:#0a7d2c;--bad:#b3261e;--line:#ddd;--acc:#2874f0}
 @media(prefers-color-scheme:dark){:root{--bg:#121212;--fg:#eee;--mut:#999;--card:#1e1e20;--ok:#4cd27a;--bad:#ff7b72;--line:#333;--acc:#7aa7ff}}
+*{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,sans-serif;padding:16px;max-width:760px;margin:auto}
-h1{font-size:1.3rem;margin:.2em 0}h2{font-size:1.05rem;margin:1.6em 0 .5em}
+h1{font-size:1.3rem;margin:.2em 0}
 .mut{color:var(--mut);font-size:.85rem}
 .card{background:var(--card);border-radius:10px;padding:12px;margin:10px 0}
+.top{display:flex;gap:12px}
+.thumb{width:96px;height:96px;border-radius:8px;object-fit:contain;background:#fff;flex:none}
+.grow{flex:1;min-width:0}
 .row{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
-.badge{font-weight:700;padding:2px 10px;border-radius:99px;border:1px solid currentColor}
+.badge{font-weight:700;padding:2px 10px;border-radius:99px;border:1px solid currentColor;font-size:.85rem}
 .ok{color:var(--ok)}.bad{color:var(--bad)}
 a.btn{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:8px;background:var(--acc);color:#fff;text-decoration:none;font-weight:600}
+a.lnk{color:var(--acc);font-size:.85rem;margin-right:10px}
 .sizes span{display:inline-block;margin:2px 3px 0 0;padding:1px 7px;border-radius:6px;font-size:.8rem;border:1px solid var(--line)}
 .sizes .y{color:var(--ok);border-color:var(--ok)}.sizes .n{color:var(--mut);text-decoration:line-through}.sizes .w{font-weight:700;outline:2px solid var(--acc)}
-table{width:100%;border-collapse:collapse}td,th{padding:4px;text-align:left;font-size:.9rem}
-input[type=number]{width:90px;padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
+.price{font-size:1.2rem;font-weight:700}
+.bd{font-size:.85rem;color:var(--mut);margin-top:4px}
+.gal{display:flex;gap:6px;overflow-x:auto;margin-top:8px;padding-bottom:4px}
+.gal img{height:110px;border-radius:6px;flex:none}
+.ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+input[type=number]{width:80px;padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
+select{padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
+.plan{font-weight:600}
 </style></head><body>
 <h1>Shoe stock watch <span id="sz"></span></h1>
 <div class="mut" id="upd">loading…</div>
-<div id="items"></div>
 
-<h2>Coin planner</h2>
-<div class="mut">Open each shoe on Flipkart, then fill in <b>Buy at ₹</b> (price before coins), the <b>₹ off</b> the coin offer gives, and the <b>coins</b> it uses. The planner picks which items to spend coins on.</div>
-<div class="card">
- <div class="row"><label>Coin balance <input type="number" id="bal" value="0"></label>
- <label>Marketplace fee ₹ <input type="number" id="fee" value="10"></label></div>
- <label class="mut"><input type="checkbox" id="waive" checked> fee is waived on orders where coins are used</label>
- <table id="calc"></table>
- <div id="plan" style="margin-top:10px;font-weight:600"></div>
+<div class="card ctl">
+ <label>Card <select id="card"><option value="axis">Axis (10%)</option><option value="flipkart_axis">Flipkart Axis (5%)</option><option value="none">No card</option></select></label>
+ <label>Coins <input type="number" id="bal" value="101"></label>
+ <label><input type="checkbox" id="only"> in stock only</label>
 </div>
+<div class="card plan" id="plan"></div>
+<div class="mut" id="asof"></div>
+<div id="items"></div>
 <script>
 const $=id=>document.getElementById(id);
 let data=null;
-const store=JSON.parse(localStorage.getItem('calc')||'{}');
-function save(){localStorage.setItem('calc',JSON.stringify(store))}
+const S=(()=>{try{return JSON.parse(localStorage.getItem('prefs')||'{}')}catch(e){return{}}})();
+const save=()=>{try{localStorage.setItem('prefs',JSON.stringify(S))}catch(e){}};
+const inr=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+const enc=encodeURIComponent;
+
 async function load(){
   try{data=await (await fetch('status.json?'+Date.now())).json()}catch(e){$('upd').textContent='could not load status.json';return}
   $('sz').textContent='– size '+data.size;
   const age=Math.round((Date.now()-Date.parse(data.updated))/60000);
   $('upd').innerHTML='Last check '+age+' min ago'+(age>45?' <b class="bad">(stale – workflow may have stopped)</b>':'');
-  $('items').innerHTML=data.items.map(i=>{
-    const sizes=Object.entries(i.sizes||{}).map(([s,v])=>`<span class="${v?'y':'n'} ${s==data.size?'w':''}">${s}</span>`).join('');
-    return `<div class="card"><div class="row"><b>${i.name}</b> <span class="mut">${i.budget||''}</span>
-      <span class="badge ${i.in_stock?'ok':'bad'}">${i.in_stock?'IN STOCK':'out'}</span></div>
-      <div class="sizes">${sizes}</div>${i.error?`<div class="bad mut">${i.error}</div>`:''}
-      <a class="btn" href="${i.url}" target="_blank" rel="noopener">${i.in_stock?'Buy on Flipkart':'Open'}</a></div>`}).join('');
-  $('calc').innerHTML='<tr><th>Item<th>Buy at ₹<th>₹ off<th>Coins</tr>'+data.items.map((i,k)=>
-    `<tr><td>${i.name}${i.in_stock?' ✅':''}`+['price','off','coins'].map(f=>`<td><input type="number" data-k="${k}" data-f="${f}" value="${(store[k]||{})[f]??''}">`).join('')+'</tr>').join('');
-  document.querySelectorAll('#calc input').forEach(e=>e.oninput=()=>{(store[e.dataset.k]??={})[e.dataset.f]=e.value;save();plan()});
-  ['bal','fee','waive'].forEach(id=>{if(store[id]!==undefined)$(id).type==='checkbox'?$(id).checked=store[id]:$(id).value=store[id];$(id).oninput=$(id).onchange=()=>{store[id]=$(id).type==='checkbox'?$(id).checked:$(id).value;save();plan()}});
-  plan();
+  $('asof').textContent='Coupon, coin and card amounts are a snapshot from '+(data.offers_as_of||'?')+' (logged-in view); prices and stock are live. Flipkart can change offers when the sale opens.';
+  ['card','bal'].forEach(k=>{if(S[k]!==undefined)$(k).value=S[k];$(k).oninput=()=>{S[k]=$(k).value;save();render()}});
+  if(S.only!==undefined)$('only').checked=S.only;
+  $('only').onchange=()=>{S.only=$('only').checked;save();render()};
+  render();
 }
+
+// price after coupon (+ optional coin discount); card % is taken on that amount
+function calc(i,useCoins){
+  const o=i.offers||{}, pct=$('card').value==='none'?0:(data.card_pct[$('card').value]||0);
+  const base=(i.price||0)-(o.coupon||0)-(useCoins?(o.coin_off||0):0);
+  const card=Math.round(base*pct);
+  return {base,card,final:base-card};
+}
+
 function plan(){
-  const bal=+$('bal').value||0,fee=+$('fee').value||0,waive=$('waive').checked;
-  const its=data.items.map((i,k)=>({n:i.name,p:+(store[k]||{}).price||0,o:+(store[k]||{}).off||0,c:+(store[k]||{}).coins||0})).filter(x=>x.p>0);
-  let best=null;
-  for(let m=0;m<(1<<its.length);m++){
-    let coins=0,total=0;
-    its.forEach((x,j)=>{const use=m>>j&1;if(use){coins+=x.c;total+=x.p-x.o+(waive?0:fee)}else total+=x.p+fee});
-    if(coins>bal)continue;
-    if(!best||total<best.total)best={m,total,coins};
+  const bal=+$('bal').value||0;
+  const pool=data.items.filter(i=>i.in_stock&&i.price);
+  if(!pool.length){$('plan').textContent='Nothing in stock in size '+data.size+' right now.';return new Set()}
+  let best={m:0,save:0,coins:0};
+  for(let m=0;m<(1<<pool.length);m++){
+    let save=0,coins=0;
+    pool.forEach((x,j)=>{if(m>>j&1){coins+=x.offers.coin_cost;save+=x.offers.coin_off}});
+    if(coins<=bal&&save>best.save)best={m,save,coins};
   }
-  if(!best){$('plan').textContent='Fill in prices.';return}
-  const base=its.reduce((s,x)=>s+x.p+fee,0);
-  const used=its.filter((x,j)=>best.m>>j&1).map(x=>x.n);
-  $('plan').innerHTML=`Spend coins on: ${used.join(', ')||'none'}<br>Coins used ${best.coins}/${bal} · total ₹${best.total} (saves ₹${base-best.total} vs no coins)`;
+  const use=pool.filter((x,j)=>best.m>>j&1);
+  $('plan').textContent='Coin plan (in-stock only): '+(use.length?use.map(x=>x.name).join(' + ')+` → ${inr(best.save)} off for ${best.coins}/${bal} coins`:'no coin offer fits your balance');
+  return new Set(use.map(x=>x.name));
+}
+
+function render(){
+  const use=plan();
+  let items=data.items.slice();
+  if($('only').checked)items=items.filter(i=>i.in_stock);
+  items.sort((a,b)=>(b.in_stock-a.in_stock)||(calc(a,use.has(a.name)).final-calc(b,use.has(b.name)).final));
+  const cardOn=$('card').value!=='none';
+  $('items').innerHTML=items.map(i=>{
+    const u=use.has(i.name), c=calc(i,u), o=i.offers||{};
+    const mult=o.coin_cost?Math.round(o.coin_off/o.coin_cost)+'x':'';
+    const sizes=Object.entries(i.sizes||{}).map(([s,v])=>`<span class="${v?'y':'n'} ${s==data.size?'w':''}">${s}</span>`).join('');
+    const q=enc(i.name.replace(/\(.*\)/,'').trim());
+    const photos=(i.photos||[]).map(p=>`<img loading="lazy" src="${p}" alt="buyer photo">`).join('');
+    const off=i.mrp?Math.round((1-i.price/i.mrp)*100):0;
+    return `<div class="card"><div class="top">
+      <img class="thumb" src="${i.image||''}" alt="">
+      <div class="grow"><div class="row"><b>${i.name}</b>
+        <span class="badge ${i.in_stock?'ok':'bad'}">${i.in_stock?'IN STOCK':'out'}</span></div>
+        <div class="price">${inr(c.final)} <span class="mut">${u?'with coins':'no coins'}${cardOn?' + card':''}</span></div>
+        <div class="bd">List ${inr(i.price)}${i.mrp?` (MRP ${inr(i.mrp)}, −${off}%)`:''}${o.coupon?` − coupon ${inr(o.coupon)}`:''}${u?` − coins ${inr(o.coin_off)}`:''}${c.card?` − card ${inr(c.card)}`:''}
+        ${u?'':`<br>Using ${o.coin_cost} coins instead: ${inr(calc(i,true).final)} (${inr(o.coin_off)} off, ${mult})`}${u?` · ${o.coin_cost} coins, ${mult}`:''}</div>
+      </div></div>
+      <div class="sizes" style="margin-top:6px">${sizes}</div>
+      ${i.error?`<div class="bad mut">${i.error}</div>`:''}
+      ${photos?`<div class="mut" style="margin-top:6px">Buyer photos (real life, any colour)</div><div class="gal">${photos}</div>`:'<div class="mut" style="margin-top:6px">No buyer photos on Flipkart yet.</div>'}
+      <div style="margin-top:6px">
+        <a class="lnk" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${q}+on+feet">on-feet photos</a>
+        <a class="lnk" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${q}+on+feet+review">YouTube</a>
+        <a class="lnk" target="_blank" rel="noopener" href="https://www.reddit.com/search/?q=${q}">Reddit</a></div>
+      <a class="btn" href="${i.url}" target="_blank" rel="noopener">${i.in_stock?'Buy on Flipkart':'Open on Flipkart'}</a></div>`}).join('');
 }
 load();setInterval(load,5*60*1000);
 </script></body></html>

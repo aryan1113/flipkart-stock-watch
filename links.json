@@ -1,35 +1,87 @@
 {
  "size": "10",
+ "offers_as_of": "2026-10-07",
+ "card_pct": {
+  "axis": 0.1,
+  "flipkart_axis": 0.05
+ },
  "items": [
   {
-   "name": "Puma Palermo (blue)",
+   "name": "Puma Palermo (Sea Illusion-Buttercream)",
    "budget": "3.5k",
    "url": "https://dl.flipkart.com/s/X7ZcDWNNNN",
-   "product_url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itm28fd02396b78f?pid=SHOHQ7Z3KHGFZZEW&marketplace=FLIPKART"
+   "product_url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itm28fd02396b78f?pid=SHOHQ7Z3WG8WXEWM&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 1190,
+    "coin_off": 500,
+    "coin_cost": 50
+   }
   },
   {
-   "name": "Puma Club II Era (white/pink)",
+   "name": "Puma Club II Era (white)",
    "budget": "1.6k",
    "url": "https://dl.flipkart.com/s/Fz3HKeuuuN",
-   "product_url": "https://www.flipkart.com/puma-club-ii-era-sneakers-men/p/itmb8e43e09c199f?pid=SHOHJSH4Y8RVWQS6&marketplace=FLIPKART"
+   "product_url": "https://www.flipkart.com/puma-club-ii-era-sneakers-men/p/itmb8e43e09c199f?pid=SHOHJSH4JV6CP64F&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 110,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
   },
   {
-   "name": "Puma RX 737 (red/maroon)",
+   "name": "Puma RX 737 Vintage Update (red)",
    "budget": "1.8k",
    "url": "https://dl.flipkart.com/s/Fz615CuuuN",
-   "product_url": "https://www.flipkart.com/puma-rx-737-vintage-update-sneakers-men/p/itm6d095691f0d0c?pid=SHOHDNRZNNGH8QVU&marketplace=FLIPKART"
+   "product_url": "https://www.flipkart.com/puma-rx-737-vintage-update-sneakers-men/p/itm6d095691f0d0c?pid=SHOHDNRZNNGH8QVU&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 120,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
   },
   {
-   "name": "Puma 9-T (synthetic leather)",
+   "name": "Puma 9-T (white, synthetic leather)",
    "budget": "1.8k",
    "url": "https://dl.flipkart.com/s/Fln!ySuuuN",
-   "product_url": "https://www.flipkart.com/puma-9-t-sneakers-men/p/itm71907c09ea454?pid=SHOHJZ8BPCY6YTBQ&marketplace=FLIPKART"
+   "product_url": "https://www.flipkart.com/puma-9-t-sneakers-men/p/itm71907c09ea454?pid=SHOHJZ8BPCY6YTBQ&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 120,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
   },
   {
-   "name": "Puma ST Runner v4 (white/green)",
+   "name": "Puma ST Runner v4 (vapor gray/green, gum)",
    "budget": "2k",
-   "url": "https://dl.flipkart.com/s/XWL_t5NNNN",
-   "product_url": "https://www.flipkart.com/puma-st-runner-v4-mesh-sneakers-men/p/itmc3c62b7aa07eb?pid=SHOHJZ8BNYF44WSA&marketplace=FLIPKART"
+   "url": "https://dl.flipkart.com/s/GS9s!PuuuN",
+   "product_url": "https://www.flipkart.com/puma-st-runner-v4-mesh-sneakers-men/p/itmc3c62b7aa07eb?pid=SHOHJZ8BNYF44WSA&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 130,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
+  },
+  {
+   "name": "Puma Palermo (green)",
+   "budget": null,
+   "url": "https://dl.flipkart.com/s/1XX1imNNNN",
+   "product_url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itmb0dd4aebdbc02?pid=SHOHCFHGNF3CRDXQ&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 0,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
+  },
+  {
+   "name": "Puma Palermo Supertifo (purple)",
+   "budget": null,
+   "url": "https://dl.flipkart.com/s/GFpqZSuuuN",
+   "product_url": "https://www.flipkart.com/puma-palermo-supertifo-sneakers-men/p/itm1b6a0f89b4e3f?pid=SHOH8Y2QN7M8KPM3&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 1200,
+    "coin_off": 500,
+    "coin_cost": 50
+   }
   }
  ]
 }
