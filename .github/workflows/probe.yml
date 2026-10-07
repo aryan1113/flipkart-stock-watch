@@ -1,0 +1,13 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          U="https://www.flipkart.com/puma-9-t-sneakers-men/p/itm71907c09ea454?pid=SHOHJZ8BPCY6YTBQ"
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+          echo "plain UA:"; curl -s -o /dev/null -w "%{http_code} %{size_download}\n" -A "$UA" "$U"
+          echo "full headers:"; curl -s -o /dev/null -w "%{http_code} %{size_download}\n" -A "$UA" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -H "Accept-Language: en-IN,en;q=0.9" -H "Sec-Fetch-Dest: document" -H "Sec-Fetch-Mode: navigate" -H "Upgrade-Insecure-Requests: 1" --compressed "$U"
+          echo "mobile UA:"; curl -s -o /dev/null -w "%{http_code} %{size_download}\n" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1" "$U"
+          echo "googlebot:"; curl -s -o /dev/null -w "%{http_code} %{size_download}\n" -A "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "$U"
