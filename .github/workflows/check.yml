@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 concurrency: check-stock
 jobs:
   check:
@@ -12,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 check.py
+        continue-on-error: true
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
       - name: Commit status
@@ -20,3 +22,12 @@ jobs:
           git config user.email "stock-bot@users.noreply.github.com"
           git add docs/status.json
           git diff --cached --quiet || (git commit -m "status $(date -u +%H:%M)" && git pull --rebase -q && git push)
+      # GitHub's cron is unreliable here, so each run re-dispatches itself after a pause.
+      # The cron above stays as a watchdog to restart the chain if it ever dies.
+      - name: Chain next run
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          sleep 240
+          gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME"

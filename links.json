@@ -82,6 +82,17 @@
     "coin_off": 500,
     "coin_cost": 50
    }
+  },
+  {
+   "name": "Puma Palermo Lth (white)",
+   "budget": null,
+   "url": "https://dl.flipkart.com/s/GGRmFcuuuN",
+   "product_url": "https://www.flipkart.com/puma-palermo-lth-sneakers-men/p/itm1022c00358e2f?pid=SHOGVZ4DFU7HYCTP&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 370,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
   }
  ]
 }
