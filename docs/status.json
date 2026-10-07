@@ -1,14 +1,14 @@
 {
  "size": "10",
- "updated": "2026-10-07T05:21:52Z",
+ "updated": "2026-10-07T05:23:26Z",
  "items": [
   {
    "name": "Puma Palermo (blue)",
    "budget": "3.5k",
    "short_url": "https://dl.flipkart.com/s/X7ZcDWNNNN",
-   "url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itm28fd02396b78f?pid=SHOHQ7Z3KHGFZZEW",
-   "checked": "2026-10-07T05:21:44Z",
-   "title": "PUMA Palermo Sneakers For Men",
+   "url": "https://dl.flipkart.com/s/X7ZcDWNNNN",
+   "checked": "2026-10-07T05:22:06Z",
+   "error": "HTTP Error 529: Server Error",
    "sizes": {
     "6": false,
     "7": false,
@@ -19,16 +19,15 @@
     "12": true,
     "13": false
    },
-   "in_stock": false,
-   "error": null
+   "in_stock": false
   },
   {
    "name": "Puma Club II Era (white/pink)",
    "budget": "1.6k",
    "short_url": "https://dl.flipkart.com/s/Fz3HKeuuuN",
-   "url": "https://www.flipkart.com/puma-club-ii-era-sneakers-men/p/itmb8e43e09c199f?pid=SHOHJSH4Y8RVWQS6",
-   "checked": "2026-10-07T05:21:46Z",
-   "title": "PUMA Club II Era Sneakers For Men",
+   "url": "https://dl.flipkart.com/s/Fz3HKeuuuN",
+   "checked": "2026-10-07T05:22:23Z",
+   "error": "HTTP Error 529: Server Error",
    "sizes": {
     "6": false,
     "7": false,
@@ -38,16 +37,15 @@
     "11": false,
     "12": false
    },
-   "in_stock": false,
-   "error": null
+   "in_stock": false
   },
   {
    "name": "Puma RX 737 (red/maroon)",
    "budget": "1.8k",
    "short_url": "https://dl.flipkart.com/s/Fz615CuuuN",
-   "url": "https://www.flipkart.com/puma-rx-737-vintage-update-sneakers-men/p/itm6d095691f0d0c?pid=SHOHDNRZNNGH8QVU",
-   "checked": "2026-10-07T05:21:47Z",
-   "title": "PUMA RX 737 Vintage Update Sneakers For Men",
+   "url": "https://dl.flipkart.com/s/Fz615CuuuN",
+   "checked": "2026-10-07T05:22:39Z",
+   "error": "HTTP Error 529: Server Error",
    "sizes": {
     "6": false,
     "7": false,
@@ -57,16 +55,15 @@
     "11": false,
     "12": false
    },
-   "in_stock": false,
-   "error": null
+   "in_stock": false
   },
   {
    "name": "Puma 9-T (synthetic leather)",
    "budget": "1.8k",
    "short_url": "https://dl.flipkart.com/s/Fln!ySuuuN",
-   "url": "https://www.flipkart.com/puma-9-t-sneakers-men/p/itm71907c09ea454?pid=SHOHJZ8BPCY6YTBQ&marketplace=FLIPKART&lid=LSTSHOHJZ8BPCY6YTBQFCXKYX&swatchAttr=size&_refId=&_appId=CL",
-   "checked": "2026-10-07T05:21:49Z",
-   "title": "PUMA 9-T Sneakers For Men",
+   "url": "https://dl.flipkart.com/s/Fln!ySuuuN",
+   "checked": "2026-10-07T05:22:55Z",
+   "error": "HTTP Error 529: Server Error",
    "sizes": {
     "6": false,
     "6.5": false,
@@ -83,16 +80,15 @@
     "12.5": false,
     "13": false
    },
-   "in_stock": true,
-   "error": null
+   "in_stock": true
   },
   {
    "name": "Puma ST Runner v4 (white/green)",
    "budget": "2k",
    "short_url": "https://dl.flipkart.com/s/XWL_t5NNNN",
-   "url": "https://www.flipkart.com/puma-st-runner-v4-mesh-sneakers-men/p/itmc3c62b7aa07eb?pid=SHOHJZ8BNYF44WSA&marketplace=FLIPKART&lid=LSTSHOHJZ8BNYF44WSAXXTA7B",
-   "checked": "2026-10-07T05:21:51Z",
-   "title": "PUMA ST Runner v4 Mesh Sneakers For Men",
+   "url": "https://dl.flipkart.com/s/XWL_t5NNNN",
+   "checked": "2026-10-07T05:23:10Z",
+   "error": "HTTP Error 529: Server Error",
    "sizes": {
     "6": false,
     "6.5": false,
@@ -108,8 +104,7 @@
     "12": false,
     "13": false
    },
-   "in_stock": true,
-   "error": null
+   "in_stock": true
   }
  ]
 }
