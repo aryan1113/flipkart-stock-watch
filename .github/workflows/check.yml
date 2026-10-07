@@ -30,4 +30,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           sleep 240
-          gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME"
+          # A single transient API error here used to kill the chain for good, so retry.
+          for i in 1 2 3 4 5 6; do
+            gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref "$GITHUB_REF_NAME" && exit 0
+            sleep $((i * 20))
+          done
+          exit 1
