@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shoe Stock Watch</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--card:#f6f6f7;--ok:#0a7d2c;--bad:#b3261e;--line:#ddd;--acc:#2874f0}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--fg:#eee;--mut:#999;--card:#1e1e20;--ok:#4cd27a;--bad:#ff7b72;--line:#333;--acc:#7aa7ff}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,sans-serif;padding:16px;max-width:760px;margin:auto}
+h1{font-size:1.3rem;margin:.2em 0}h2{font-size:1.05rem;margin:1.6em 0 .5em}
+.mut{color:var(--mut);font-size:.85rem}
+.card{background:var(--card);border-radius:10px;padding:12px;margin:10px 0}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{font-weight:700;padding:2px 10px;border-radius:99px;border:1px solid currentColor}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+a.btn{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:8px;background:var(--acc);color:#fff;text-decoration:none;font-weight:600}
+.sizes span{display:inline-block;margin:2px 3px 0 0;padding:1px 7px;border-radius:6px;font-size:.8rem;border:1px solid var(--line)}
+.sizes .y{color:var(--ok);border-color:var(--ok)}.sizes .n{color:var(--mut);text-decoration:line-through}.sizes .w{font-weight:700;outline:2px solid var(--acc)}
+table{width:100%;border-collapse:collapse}td,th{padding:4px;text-align:left;font-size:.9rem}
+input[type=number]{width:90px;padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
+</style></head><body>
+<h1>Shoe stock watch <span id="sz"></span></h1>
+<div class="mut" id="upd">loading…</div>
+<div id="items"></div>
+
+<h2>Coin planner</h2>
+<div class="mut">Open each shoe on Flipkart, then fill in <b>Buy at ₹</b> (price before coins), the <b>₹ off</b> the coin offer gives, and the <b>coins</b> it uses. The planner picks which items to spend coins on.</div>
+<div class="card">
+ <div class="row"><label>Coin balance <input type="number" id="bal" value="0"></label>
+ <label>Marketplace fee ₹ <input type="number" id="fee" value="10"></label></div>
+ <label class="mut"><input type="checkbox" id="waive" checked> fee is waived on orders where coins are used</label>
+ <table id="calc"></table>
+ <div id="plan" style="margin-top:10px;font-weight:600"></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+let data=null;
+const store=JSON.parse(localStorage.getItem('calc')||'{}');
+function save(){localStorage.setItem('calc',JSON.stringify(store))}
+async function load(){
+  try{data=await (await fetch('status.json?'+Date.now())).json()}catch(e){$('upd').textContent='could not load status.json';return}
+  $('sz').textContent='– size '+data.size;
+  const age=Math.round((Date.now()-Date.parse(data.updated))/60000);
+  $('upd').innerHTML='Last check '+age+' min ago'+(age>45?' <b class="bad">(stale – workflow may have stopped)</b>':'');
+  $('items').innerHTML=data.items.map(i=>{
+    const sizes=Object.entries(i.sizes||{}).map(([s,v])=>`<span class="${v?'y':'n'} ${s==data.size?'w':''}">${s}</span>`).join('');
+    return `<div class="card"><div class="row"><b>${i.name}</b> <span class="mut">${i.budget||''}</span>
+      <span class="badge ${i.in_stock?'ok':'bad'}">${i.in_stock?'IN STOCK':'out'}</span></div>
+      <div class="sizes">${sizes}</div>${i.error?`<div class="bad mut">${i.error}</div>`:''}
+      <a class="btn" href="${i.url}" target="_blank" rel="noopener">${i.in_stock?'Buy on Flipkart':'Open'}</a></div>`}).join('');
+  $('calc').innerHTML='<tr><th>Item<th>Buy at ₹<th>₹ off<th>Coins</tr>'+data.items.map((i,k)=>
+    `<tr><td>${i.name}${i.in_stock?' ✅':''}`+['price','off','coins'].map(f=>`<td><input type="number" data-k="${k}" data-f="${f}" value="${(store[k]||{})[f]??''}">`).join('')+'</tr>').join('');
+  document.querySelectorAll('#calc input').forEach(e=>e.oninput=()=>{(store[e.dataset.k]??={})[e.dataset.f]=e.value;save();plan()});
+  ['bal','fee','waive'].forEach(id=>{if(store[id]!==undefined)$(id).type==='checkbox'?$(id).checked=store[id]:$(id).value=store[id];$(id).oninput=$(id).onchange=()=>{store[id]=$(id).type==='checkbox'?$(id).checked:$(id).value;save();plan()}});
+  plan();
+}
+function plan(){
+  const bal=+$('bal').value||0,fee=+$('fee').value||0,waive=$('waive').checked;
+  const its=data.items.map((i,k)=>({n:i.name,p:+(store[k]||{}).price||0,o:+(store[k]||{}).off||0,c:+(store[k]||{}).coins||0})).filter(x=>x.p>0);
+  let best=null;
+  for(let m=0;m<(1<<its.length);m++){
+    let coins=0,total=0;
+    its.forEach((x,j)=>{const use=m>>j&1;if(use){coins+=x.c;total+=x.p-x.o+(waive?0:fee)}else total+=x.p+fee});
+    if(coins>bal)continue;
+    if(!best||total<best.total)best={m,total,coins};
+  }
+  if(!best){$('plan').textContent='Fill in prices.';return}
+  const base=its.reduce((s,x)=>s+x.p+fee,0);
+  const used=its.filter((x,j)=>best.m>>j&1).map(x=>x.n);
+  $('plan').innerHTML=`Spend coins on: ${used.join(', ')||'none'}<br>Coins used ${best.coins}/${bal} · total ₹${best.total} (saves ₹${base-best.total} vs no coins)`;
+}
+load();setInterval(load,5*60*1000);
+</script></body></html>
