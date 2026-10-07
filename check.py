@@ -8,6 +8,7 @@ import os
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -26,10 +27,25 @@ LABEL = re.compile(r'"label_0":\{"value":\{"text":"([^"]+)"')
 TITLE = re.compile(r"<title>(.*?)</title>", re.S)
 
 
-def fetch(url):
-    req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=40) as r:
-        return r.geturl(), r.read().decode("utf-8", "ignore")
+HEADERS = {
+    "User-Agent": UA,
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-IN,en;q=0.9",
+    "Upgrade-Insecure-Requests": "1",
+}
+
+
+def fetch(url, tries=4):
+    # Flipkart answers 529/429 when it throttles; back off and retry.
+    for n in range(tries):
+        try:
+            req = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(req, timeout=40) as r:
+                return r.geturl(), r.read().decode("utf-8", "ignore")
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 503, 529) or n == tries - 1:
+                raise
+            time.sleep(10 * (n + 1))
 
 
 def parse(html):
@@ -76,9 +92,9 @@ def main():
         rec = {"name": it["name"], "budget": it.get("budget"), "short_url": it["url"],
                "url": it["url"], "checked": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
         try:
-            final, html = fetch(it["url"])
+            final, html = fetch(it.get("product_url", it["url"]))
             title, sizes = parse(html)
-            rec["url"] = final.split("&otracker")[0].split("&fm=")[0]
+            rec["url"] = it.get("product_url", it["url"])
             rec["title"] = title
             if not sizes:
                 raise RuntimeError("no size info found (blocked or layout changed)")
@@ -91,10 +107,11 @@ def main():
                 notify(topic, f"Size {want} IN STOCK", f"{it['name']} - size {want} is available now",
                        click=rec["url"], priority="urgent")
         except Exception as e:
-            rec.update(error=str(e), sizes=old.get("sizes", {}), in_stock=old.get("in_stock", False))
+            rec.update(error=str(e), sizes=old.get("sizes", {}), in_stock=old.get("in_stock", False), stale=True)
             if not old.get("error"):
                 notify(topic, "Flipkart watcher problem", f"{it['name']}: {e}", priority="default")
         items.append(rec)
+        time.sleep(3)
         print(f"{it['name']}: in_stock={rec['in_stock']} err={rec['error']}")
     STATUS.write_text(json.dumps({"size": want, "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                                   "items": items}, indent=1))
