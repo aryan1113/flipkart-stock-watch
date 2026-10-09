@@ -5,7 +5,7 @@
   "axis": 0.1,
   "flipkart_axis": 0.05
  },
- "updated": "2026-10-09T18:53:09Z",
+ "updated": "2026-10-09T18:57:57Z",
  "items": [
   {
    "name": "Puma Palermo (Sea Illusion-Buttercream)",
@@ -17,7 +17,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/X7ZcDWNNNN",
    "url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itm28fd02396b78f?pid=SHOHQ7Z3WG8WXEWM&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:52:35Z",
+   "checked": "2026-10-09T18:57:19Z",
    "title": "PUMA Palermo Sneakers For Men",
    "sizes": {
     "6": false,
@@ -37,7 +37,7 @@
    "photos": [
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_043d650698934fe2a7f9e791ea04e611.jpg?q=80"
    ],
-   "photos_ts": 1791528925.8865504
+   "photos_ts": 1791572241.0489278
   },
   {
    "name": "Puma Club II Era (white)",
@@ -49,7 +49,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/Fz3HKeuuuN",
    "url": "https://www.flipkart.com/puma-club-ii-era-sneakers-men/p/itmb8e43e09c199f?pid=SHOHJSH4JV6CP64F&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:52:39Z",
+   "checked": "2026-10-09T18:57:24Z",
    "title": "PUMA Club II Era Sneakers For Men",
    "sizes": {
     "6": false,
@@ -73,7 +73,7 @@
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_4234380db57340d9a0a37d0832fafd49.jpg?q=80",
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_4327b318bfda4e93a99cbb1ebda01b7a.jpg?q=80"
    ],
-   "photos_ts": 1791528930.8558962
+   "photos_ts": 1791572247.125554
   },
   {
    "name": "Puma RX 737 Vintage Update (red)",
@@ -85,7 +85,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/Fz615CuuuN",
    "url": "https://www.flipkart.com/puma-rx-737-vintage-update-sneakers-men/p/itm6d095691f0d0c?pid=SHOHDNRZNNGH8QVU&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:52:43Z",
+   "checked": "2026-10-09T18:57:30Z",
    "title": "PUMA RX 737 Vintage Update Sneakers For Men",
    "sizes": {
     "6": false,
@@ -109,7 +109,7 @@
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_c610f77c2e9842f49b9edf3663dd7b94.jpg?q=80",
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_1f2ce2553dc2440e86bcd4d1c5e853ee.jpg?q=80"
    ],
-   "photos_ts": 1791528935.8080301
+   "photos_ts": 1791572251.553091
   },
   {
    "name": "Puma 9-T (white, synthetic leather)",
@@ -121,7 +121,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/Fln!ySuuuN",
    "url": "https://www.flipkart.com/puma-9-t-sneakers-men/p/itm71907c09ea454?pid=SHOHJZ8BPCY6YTBQ&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:52:47Z",
+   "checked": "2026-10-09T18:57:34Z",
    "title": "PUMA 9-T Sneakers For Men",
    "sizes": {
     "6": false,
@@ -152,7 +152,7 @@
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_7af6dc469a124e6b90b05a09063a6714.jpg?q=80",
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_8560c3e9c8214c16b37988dac732cd93.jpg?q=80"
    ],
-   "photos_ts": 1791528940.9393444
+   "photos_ts": 1791572256.034483
   },
   {
    "name": "Puma ST Runner v4 (vapor gray/green, gum)",
@@ -164,12 +164,12 @@
    },
    "short_url": "https://dl.flipkart.com/s/GS9s!PuuuN",
    "url": "https://www.flipkart.com/puma-st-runner-v4-mesh-sneakers-men/p/itmc3c62b7aa07eb?pid=SHOHJZ8BNYF44WSA&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:52:51Z",
+   "checked": "2026-10-09T18:57:39Z",
    "title": "PUMA ST Runner v4 Mesh Sneakers For Men",
    "sizes": {
     "6": false,
     "6.5": false,
-    "7": false,
+    "7": true,
     "7.5": false,
     "8": false,
     "8.5": false,
@@ -206,7 +206,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/1XX1imNNNN",
    "url": "https://www.flipkart.com/puma-palermo-sneakers-men/p/itmb0dd4aebdbc02?pid=SHOHCFHGNF3CRDXQ&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:52:56Z",
+   "checked": "2026-10-09T18:57:43Z",
    "title": "PUMA Palermo Sneakers For Men",
    "sizes": {
     "3": true,
@@ -234,7 +234,7 @@
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_708789c27ae3445286f6176dfc974fc8.jpg?q=80",
     "https://rukminim2.flixcart.com/blobio/376/376/imr/blobio-imr_e1388f81a3774ab899ba3965fe5ab3fb.jpg?q=80"
    ],
-   "photos_ts": 1791528950.0741043
+   "photos_ts": 1791572264.821326
   },
   {
    "name": "Puma Palermo Supertifo (purple)",
@@ -246,7 +246,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/GFpqZSuuuN",
    "url": "https://www.flipkart.com/puma-palermo-supertifo-sneakers-men/p/itm1b6a0f89b4e3f?pid=SHOH8Y2QN7M8KPM3&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:53:00Z",
+   "checked": "2026-10-09T18:57:47Z",
    "title": "PUMA Palermo Supertifo Sneakers For Men",
    "sizes": {
     "3": true,
@@ -266,7 +266,7 @@
    "mrp": 7999,
    "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/w/4/s/-watermarked-original-imahg3udyc82jujh.jpeg",
    "photos": [],
-   "photos_ts": 1791571981.829797
+   "photos_ts": 1791572269.2743232
   },
   {
    "name": "Puma Palermo Lth (white)",
@@ -278,7 +278,7 @@
    },
    "short_url": "https://dl.flipkart.com/s/GGRmFcuuuN",
    "url": "https://www.flipkart.com/puma-palermo-lth-sneakers-men/p/itm1022c00358e2f?pid=SHOGVZ4DFU7HYCTP&marketplace=FLIPKART",
-   "checked": "2026-10-09T18:53:04Z",
+   "checked": "2026-10-09T18:57:52Z",
    "title": "PUMA Palermo Lth Sneakers For Men",
    "sizes": {
     "6": false,
