@@ -5,6 +5,10 @@
   "axis": 0.1,
   "flipkart_axis": 0.05
  },
+ "limits": {
+  "expense": 2000,
+  "personal": 4000
+ },
  "items": [
   {
    "name": "Puma Palermo (Sea Illusion-Buttercream)",
@@ -15,7 +19,8 @@
     "coupon": 1190,
     "coin_off": 500,
     "coin_cost": 50
-   }
+   },
+   "rank": 4
   },
   {
    "name": "Puma Club II Era (white)",
@@ -37,7 +42,8 @@
     "coupon": 120,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "rank": 2
   },
   {
    "name": "Puma 9-T (white, synthetic leather)",
@@ -48,7 +54,8 @@
     "coupon": 120,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "track_only": true
   },
   {
    "name": "Puma ST Runner v4 (vapor gray/green, gum)",
@@ -59,7 +66,8 @@
     "coupon": 130,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "track_only": true
   },
   {
    "name": "Puma Palermo (green)",
@@ -70,7 +78,8 @@
     "coupon": 0,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "rank": 1
   },
   {
    "name": "Puma Palermo Supertifo (purple)",
@@ -92,7 +101,8 @@
     "coupon": 370,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "rank": 3
   },
   {
    "name": "Puma RX 737 B&B (white)",
@@ -103,7 +113,8 @@
     "coupon": 144,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "offers_as_of": "2026-10-12"
   },
   {
    "name": "Puma Palermo Lth Res (white/blue horizon)",
@@ -114,7 +125,8 @@
     "coupon": 583,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "offers_as_of": "2026-10-12"
   }
  ]
 }

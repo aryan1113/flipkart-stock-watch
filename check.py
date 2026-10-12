@@ -102,7 +102,8 @@ def main():
     for it in cfg["items"]:
         old = prev.get(it["url"], {})
         rec = {"name": it["name"], "budget": it.get("budget"), "offers": it.get("offers", {}), "short_url": it["url"],
-               "url": it["url"], "checked": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+               "url": it["url"], "rank": it.get("rank"), "track_only": it.get("track_only", False),
+               "offers_as_of": it.get("offers_as_of"), "checked": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
         try:
             final, html = fetch(it.get("product_url", it["url"]))
             title, sizes = parse(html)
@@ -141,7 +142,7 @@ def main():
         items.append(rec)
         time.sleep(3)
         print(f"{it['name']}: in_stock={rec['in_stock']} err={rec['error']}")
-    STATUS.write_text(json.dumps({"size": want, "offers_as_of": cfg.get("offers_as_of"), "card_pct": cfg.get("card_pct", {}), "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+    STATUS.write_text(json.dumps({"size": want, "offers_as_of": cfg.get("offers_as_of"), "card_pct": cfg.get("card_pct", {}), "limits": cfg.get("limits", {}), "updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                                   "items": items}, indent=1))
 
 
