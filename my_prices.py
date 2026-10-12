@@ -10,7 +10,7 @@ so it never touches your everyday browser.
   python3 my_prices.py                                      # loop forever (every 30 min)
 
 Flags: --once (single pass), --no-push (don't git commit/push), --headed (show the browser),
-       --every MINUTES. Env: NTFY_TOPIC (optional) - alert when the login expires.
+       --every MINUTES, --quiet START-END (skip these local hours, default 2-7). Env: NTFY_TOPIC (optional) - alert when the login expires.
 """
 import argparse
 import json
@@ -113,12 +113,20 @@ def main():
     ap.add_argument("--no-push", action="store_true")
     ap.add_argument("--headed", action="store_true")
     ap.add_argument("--every", type=int, default=30)
+    ap.add_argument("--quiet", default="2-7", help="local-time hours to skip, START-END (default 2-7); 'none' to disable")
     args = ap.parse_args()
     if args.login:
         return login(args)
     from playwright.sync_api import sync_playwright
     warned = False
+    q0, q1 = (None, None) if args.quiet == "none" else map(int, args.quiet.split("-"))
     while True:
+        hour = time.localtime().tm_hour
+        if q0 is not None and q0 <= hour < q1:
+            wake = time.mktime(time.localtime()[:3] + (q1, 0, 0, 0, 0, -1))
+            print(f"quiet hours {q0}-{q1}: sleeping until {time.strftime('%H:%M', time.localtime(wake))}")
+            time.sleep(max(60, wake - time.time()))
+            continue
         cfg = json.loads((ROOT / "links.json").read_text())
         with sync_playwright() as pw:
             ctx = launch(pw, args.headed)
