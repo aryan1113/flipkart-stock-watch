@@ -10,7 +10,7 @@ so it never touches your everyday browser.
   python3 my_prices.py                                      # loop forever (every 30 min)
 
 Flags: --once (single pass), --no-push (don't git commit/push), --headed (show the browser),
-       --every MINUTES, --quiet START-END (skip these local hours, default 2-7). Env: NTFY_TOPIC (optional) - alert when the login expires.
+       --every MINUTES, --quiet START-END (skip these local hours, default 2-7). Alerts via ntfy when your price drops or the login expires: set NTFY_TOPIC or put the topic in .ntfy_topic.
 """
 import argparse
 import json
@@ -24,6 +24,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 OUT = ROOT / "docs" / "my_prices.json"
+HIST = ROOT / "docs" / "my_price_history.json"  # {item name: [[iso time, fsp], ...]}, appended only when fsp changes
+HIST_MAX = 400
 PROFILE = Path.home() / ".flipkart-watch-profile"
 PPD = re.compile(r'"ppd":\{([^}]*)\}')
 NUM = lambda key, s: (m := re.search(rf'"{key}":\s*(\d+)', s)) and int(m.group(1))
@@ -55,13 +57,22 @@ def logged_in(ctx):
     return r.status == 200
 
 
-def notify(msg):
-    topic = os.environ.get("NTFY_TOPIC")
+def ntfy_topic():
+    """NTFY_TOPIC env var, else the first line of the git-ignored .ntfy_topic file."""
+    t = os.environ.get("NTFY_TOPIC")
+    f = ROOT / ".ntfy_topic"
+    return t or (f.read_text().strip() if f.exists() else None)
+
+
+def notify(msg, title="Flipkart price script", click=None, priority="high"):
+    topic = ntfy_topic()
     if topic:
+        headers = {"Title": title, "Priority": priority, "Tags": "money_with_wings"}
+        if click:
+            headers["Click"] = click
         try:
             urllib.request.urlopen(urllib.request.Request(
-                f"https://ntfy.sh/{topic}", data=msg.encode(),
-                headers={"Title": "Flipkart price script", "Priority": "high"}), timeout=20)
+                f"https://ntfy.sh/{topic}", data=msg.encode(), headers=headers), timeout=20)
         except Exception as e:
             print("ntfy failed:", e, file=sys.stderr)
 
@@ -90,10 +101,33 @@ def one_pass(ctx, items):
     return out
 
 
+def record(items, cfg):
+    """Append changed fsp values to the history file and ntfy when a price drops below the last one seen."""
+    hist = json.loads(HIST.read_text()) if HIST.exists() else {}
+    now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    limit = (cfg.get("limits") or {}).get("personal")
+    urls = {i["name"]: i.get("product_url", i["url"]) for i in cfg["items"]}
+    for name, rec in items.items():
+        fsp = rec.get("fsp")
+        if not fsp:
+            continue
+        h = hist.setdefault(name, [])
+        last = h[-1][1] if h else None
+        if last == fsp:
+            continue
+        h.append([now, fsp])
+        del h[:-HIST_MAX]
+        if last and fsp < last:
+            fit = f" (within your Rs {limit})" if limit and fsp <= limit else ""
+            notify(f"{name}: Rs {last} -> Rs {fsp}{fit}", title="Your price dropped", click=urls[name],
+                   priority="urgent" if fit else "high")
+    HIST.write_text(json.dumps(hist, separators=(",", ":")))
+
+
 def push():
     def git(*a):
         return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
-    git("add", "docs/my_prices.json")
+    git("add", "docs/my_prices.json", "docs/my_price_history.json")
     if git("diff", "--cached", "--quiet").returncode == 0:
         return
     git("commit", "-m", f"my prices {time.strftime('%H:%M')}")
@@ -142,6 +176,7 @@ def main():
                 warned = True
         else:
             warned = False
+        record(items, cfg)
         OUT.write_text(json.dumps({"updated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                                    "logged_in": ok, "items": items}, indent=1))
         if not args.no_push:

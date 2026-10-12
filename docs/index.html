@@ -30,7 +30,7 @@ a.lnk{color:var(--acc);font-size:.85rem;margin-right:10px}
 .ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 input[type=number]{width:80px;padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
 select{padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
-.plan{font-weight:600}
+.hist{font-size:.8rem;color:var(--mut);margin-top:4px}.hist summary{cursor:pointer;color:var(--acc)}.hist div{padding-left:10px}
 </style></head><body>
 <h1>Shoe stock watch <span id="sz"></span></h1>
 <div class="mut" id="upd">loading…</div>
@@ -44,7 +44,7 @@ select{padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--l
 <div id="items"></div>
 <script>
 const $=id=>document.getElementById(id);
-let data=null,mine=null;const MY_MAX_MIN=180;
+let data=null,mine=null,hist={};const MY_MAX_MIN=180;
 const S=(()=>{try{return JSON.parse(localStorage.getItem('prefs')||'{}')}catch(e){return{}}})();
 const save=()=>{try{localStorage.setItem('prefs',JSON.stringify(S))}catch(e){}};
 const inr=n=>'₹'+Math.round(n).toLocaleString('en-IN');
@@ -55,6 +55,7 @@ async function load(){
   $('sz').textContent='– size '+data.size;
   const age=Math.round((Date.now()-Date.parse(data.updated))/60000);
   $('upd').innerHTML='Last check '+age+' min ago'+(age>45?' <b class="bad">(stale – workflow may have stopped)</b>':'');
+  try{hist=await (await fetch('my_price_history.json?'+Date.now())).json()}catch(e){hist={}}
   try{mine=await (await fetch('my_prices.json?'+Date.now())).json()}catch(e){mine=null}
   const mAge=mine&&mine.logged_in?Math.round((Date.now()-Date.parse(mine.updated))/60000):null;
   $('asof').innerHTML=mAge===null?'<b class="bad">Your logged-in prices are unavailable</b> (login expired or script not running), so prices shown are Flipkart\'s logged-out list prices.'
@@ -82,6 +83,13 @@ function verdict(i,c){
   else v={cls:'ok',t:`${inr(b)}`};
   if(!c.mine)v.t+=' · list price, not yours';
   return v;
+}
+const when=t=>new Date(t).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+function histHtml(i){
+  const h=hist[i.name]||[]; if(!h.length)return '';
+  const lo=Math.min(...h.map(x=>x[1]));
+  const rows=h.slice(-8).reverse().map(([t,v])=>`<div>${inr(v)} <span class="mut">from ${when(t)}</span></div>`).join('');
+  return `<details class="hist"><summary>Your price history · lowest seen ${inr(lo)}</summary>${rows}</details>`;
 }
 const hidden=()=>new Set(S.hidden||[]);
 function setHidden(name,on){const h=hidden();on?h.add(name):h.delete(name);S.hidden=[...h];save();render()}
@@ -113,6 +121,7 @@ function render(){
         ${vd?`<div class="verdict ${vd.cls}">${vd.t}</div>`:''}
         <div class="price">${inr(c.base)} <span class="mut">${c.mine?'your price':'list price'}</span></div>
         <div class="bd">${i.mrp?`MRP ${inr(i.mrp)}, −${off}%`:''}${c.mine&&i.price&&i.price!==c.base?` · logged-out list ${inr(i.price)}`:''}</div>
+        ${histHtml(i)}
       </div></div>
       <div class="sizes" style="margin-top:6px">${sizes}</div>
       ${i.error?`<div class="bad mut">${i.error}</div>`:''}
