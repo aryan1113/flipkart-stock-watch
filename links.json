@@ -93,6 +93,28 @@
     "coin_off": 100,
     "coin_cost": 100
    }
+  },
+  {
+   "name": "Puma RX 737 B&B (white)",
+   "budget": null,
+   "url": "https://dl.flipkart.com/s/2LJWo6NNNN",
+   "product_url": "https://www.flipkart.com/puma-rx-737-b-b-sneakers-unisex/p/itm93f1a29a65b2c?pid=SHOHZ9F4FMDXPQNE&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 144,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
+  },
+  {
+   "name": "Puma Palermo Lth Res (white/blue horizon)",
+   "budget": null,
+   "url": "https://dl.flipkart.com/s/LY3sqvuuuN",
+   "product_url": "https://www.flipkart.com/puma-palermo-lth-res-sneakers-men/p/itm9d6a818e3712e?pid=SHOHD4HVQYAHJAQZ&marketplace=FLIPKART",
+   "offers": {
+    "coupon": 583,
+    "coin_off": 100,
+    "coin_cost": 100
+   }
   }
  ]
 }
