@@ -20,7 +20,7 @@
     "coin_off": 500,
     "coin_cost": 50
    },
-   "rank": 4
+   "rank": 5
   },
   {
    "name": "Puma Club II Era (white)",
@@ -31,7 +31,8 @@
     "coupon": 110,
     "coin_off": 100,
     "coin_cost": 100
-   }
+   },
+   "rank": 6
   },
   {
    "name": "Puma RX 737 Vintage Update (red)",
@@ -126,7 +127,8 @@
     "coin_off": 100,
     "coin_cost": 100
    },
-   "offers_as_of": "2026-10-12"
+   "offers_as_of": "2026-10-12",
+   "rank": 4
   }
  ]
 }

@@ -2,8 +2,8 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Shoe Stock Watch</title>
 <style>
-:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--card:#f6f6f7;--ok:#0a7d2c;--bad:#b3261e;--warn:#b26a00;--line:#ddd;--acc:#2874f0}
-@media(prefers-color-scheme:dark){:root{--bg:#121212;--fg:#eee;--mut:#999;--card:#1e1e20;--ok:#4cd27a;--bad:#ff7b72;--warn:#e8a33d;--line:#333;--acc:#7aa7ff}}
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--card:#f6f6f7;--ok:#0a7d2c;--bad:#b3261e;--line:#ddd;--acc:#2874f0}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--fg:#eee;--mut:#999;--card:#1e1e20;--ok:#4cd27a;--bad:#ff7b72;--line:#333;--acc:#7aa7ff}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,sans-serif;padding:16px;max-width:760px;margin:auto}
 h1{font-size:1.3rem;margin:.2em 0}
@@ -14,8 +14,10 @@ h1{font-size:1.3rem;margin:.2em 0}
 .grow{flex:1;min-width:0}
 .row{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
 .badge{font-weight:700;padding:2px 10px;border-radius:99px;border:1px solid currentColor;font-size:.85rem}
-.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
-.verdict{font-weight:700;margin-top:6px}.tag{font-size:.8rem;color:var(--mut);font-weight:600}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.verdict{font-size:.9rem;margin-top:4px}.verdict.ok{font-weight:600}.verdict.over{color:var(--mut)}
+.dim{opacity:.6}
+.x{background:none;border:0;color:var(--mut);font-size:1.1rem;line-height:1;cursor:pointer;padding:2px 6px;border-radius:6px}.x:hover{background:var(--line)}
+.lnkb{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;font-size:.85rem;padding:0}.tag{font-size:.8rem;color:var(--mut);font-weight:600}
 .pick{border:2px solid var(--ok)}
 a.btn{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:8px;background:var(--acc);color:#fff;text-decoration:none;font-weight:600}
 a.lnk{color:var(--acc);font-size:.85rem;margin-right:10px}
@@ -37,6 +39,7 @@ select{padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--l
  <label>Card <select id="card"><option value="axis">Axis (10%)</option><option value="flipkart_axis">Flipkart Axis (5%)</option><option value="none">No card</option></select></label>
  <label>Coins <input type="number" id="bal" value="101"></label>
  <label><input type="checkbox" id="only"> in stock only</label>
+ <button class="lnkb" id="hidbtn" style="display:none"></button>
 </div>
 <div class="card" id="pick"></div>
 <div class="card plan" id="plan"></div>
@@ -87,31 +90,35 @@ function plan(){
 
 const L=()=>data.limits||{};
 const ageDays=i=>{const d=i.offers_as_of||data.offers_as_of;return d?Math.floor((Date.now()-Date.parse(d))/864e5):null};
-// Verdict is judged on the price BEFORE any card offer: card discounts are decided per shoe at checkout, so we never guess them.
+// Judged on the price BEFORE any card offer: card discounts are decided per shoe at checkout, so we never guess them.
 function verdict(i,c){
-  const lim=L(), b=c.base;
-  if(!i.in_stock)return{cls:'bad',t:`Not in size ${data.size} right now. Wait for the alert.`};
-  let v;
-  if(lim.expense&&b<=lim.expense)v={cls:'ok',t:`BUY: ${inr(b)} before card offer, fits your ${inr(lim.expense)} company-expense limit.`};
-  else if(lim.personal&&b<=lim.personal)v={cls:'ok',t:`BUY: ${inr(b)} before card offer, within your ${inr(lim.personal)}.`};
-  else if(lim.personal)v={cls:'warn',t:`${inr(b)} before card offer, ${inr(b-lim.personal)} over your ${inr(lim.personal)}. Only worth it if your card offer at checkout takes off at least ${inr(b-lim.personal)}.`};
-  else v={cls:'ok',t:`${inr(b)} before card offer.`};
+  if(!i.in_stock)return null;
+  const lim=L(), b=c.base; let v;
+  if(lim.expense&&b<=lim.expense)v={cls:'ok',t:`✓ Buy · ${inr(b)}, fits your ${inr(lim.expense)} expense limit`};
+  else if(lim.personal&&b<=lim.personal)v={cls:'ok',t:`✓ Buy · ${inr(b)}, within your ${inr(lim.personal)}`};
+  else if(lim.personal)v={cls:'over',t:`${inr(b)} before card offer · needs ${inr(b-lim.personal)} off to reach ${inr(lim.personal)}`};
+  else v={cls:'ok',t:`${inr(b)} before card offer`};
   const a=ageDays(i);
-  if(a!==null&&a>2)v.t+=` Offers last checked ${a} days ago, so verify the price on Flipkart.`;
+  if(a!==null&&a>2)v.t+=` · offers ${a}d old`;
   return v;
 }
+const hidden=()=>new Set(S.hidden||[]);
+function setHidden(name,on){const h=hidden();on?h.add(name):h.delete(name);S.hidden=[...h];save();render()}
 
 function render(){
   const use=plan();
+  const H=hidden(), nHid=data.items.filter(i=>H.has(i.name)).length;
+  const hb=$('hidbtn');hb.style.display=nHid?'':'none';hb.textContent=S.showHidden?`hide the ${nHid} hidden`:`${nHid} hidden · show`;hb.onclick=()=>{S.showHidden=!S.showHidden;save();render()};
   let items=data.items.slice();
+  if(!S.showHidden)items=items.filter(i=>!H.has(i.name));
   if($('only').checked)items=items.filter(i=>i.in_stock);
   const tier=i=>i.track_only?2:(i.rank?0:1);
   items.sort((a,b)=>(b.in_stock-a.in_stock)||(tier(a)-tier(b))||((a.rank||99)-(b.rank||99))||(calc(a,use.has(a.name)).base-calc(b,use.has(b.name)).base));
-  const best=items.find(i=>i.in_stock&&!i.track_only);
+  const best=items.find(i=>i.in_stock&&!i.track_only&&!H.has(i.name));
   if(best){const bc=calc(best,use.has(best.name)),bv=verdict(best,bc);
     $('pick').className='card'+(bv.cls==='ok'?' pick':'');
-    $('pick').innerHTML=`<div class="mut">Best pick right now (your ranking, in stock in size ${data.size})</div><b>${best.rank?'#'+best.rank+' ':''}${best.name}</b><div class="verdict ${bv.cls}">${bv.t}</div>`}
-  else{$('pick').className='card';$('pick').innerHTML=`<b>Nothing you want is in stock in size ${data.size} right now.</b><div class="mut">Alerts are on; the next restock will notify you.</div>`}
+    $('pick').innerHTML=`<div class="mut">Best pick right now</div><b>${best.rank?'#'+best.rank+' ':''}${best.name}</b><div class="verdict ${bv.cls}">${bv.t}</div>`}
+  else{$('pick').className='card';$('pick').innerHTML=`<b>Nothing you want is in stock in size ${data.size} right now.</b>`}
   const cardOn=$('card').value!=='none';
   $('items').innerHTML=items.map(i=>{
     const u=use.has(i.name), c=calc(i,u), o=i.offers||{};
@@ -120,12 +127,12 @@ function render(){
     const q=enc(i.name.replace(/\(.*\)/,'').trim());
     const photos=(i.photos||[]).map(p=>`<img loading="lazy" src="${p}" alt="buyer photo">`).join('');
     const off=i.mrp?Math.round((1-i.price/i.mrp)*100):0;
-    const vd=verdict(i,c), tag=i.track_only?'tracking only':(i.rank?'#'+i.rank+' pick':'unranked');
-    return `<div class="card"><div class="top">
+    const vd=verdict(i,c), isH=H.has(i.name), tag=i.track_only?'tracking only':(i.rank?'#'+i.rank+' pick':'unranked');
+    return `<div class="card${i.in_stock?'':' dim'}"><div class="top">
       <img class="thumb" src="${i.image||''}" alt="">
       <div class="grow"><div class="row"><b>${i.name} <span class="tag">${tag}</span></b>
-        <span class="badge ${i.in_stock?'ok':'bad'}">${i.in_stock?'IN STOCK':'out'}</span></div>
-        <div class="verdict ${vd.cls}">${vd.t}</div>
+        <span><span class="badge ${i.in_stock?'ok':'bad'}">${i.in_stock?'IN STOCK':'out'}</span> <button class="x" data-n="${enc(i.name)}" data-h="${isH?0:1}" title="${isH?'Show this shoe again':'Hide this shoe from my view (still tracked)'}">${isH?'↩':'✕'}</button></span></div>
+        ${vd?`<div class="verdict ${vd.cls}">${vd.t}</div>`:''}
         <div class="price">${inr(c.final)} <span class="mut">${u?'with coins':'no coins'}${cardOn?' + card':''}</span></div>
         <div class="bd">List ${inr(i.price)}${i.mrp?` (MRP ${inr(i.mrp)}, −${off}%)`:''}${o.coupon?` − coupon ${inr(o.coupon)}`:''}${u?` − coins ${inr(o.coin_off)}`:''}${c.card?` − card ${inr(c.card)}`:''}
         ${u?'':`<br>Using ${o.coin_cost} coins instead: ${inr(calc(i,true).final)} (${inr(o.coin_off)} off, ${mult})`}${u?` · ${o.coin_cost} coins, ${mult}`:''}</div>
@@ -139,5 +146,6 @@ function render(){
         <a class="lnk" target="_blank" rel="noopener" href="https://www.reddit.com/search/?q=${q}">Reddit</a></div>
       <a class="btn" href="${i.url}" target="_blank" rel="noopener">${i.in_stock?'Buy on Flipkart':'Open on Flipkart'}</a></div>`}).join('');
 }
+$('items').addEventListener('click',e=>{const b=e.target.closest('.x');if(b)setHidden(decodeURIComponent(b.dataset.n),b.dataset.h==='1')});
 load();setInterval(load,5*60*1000);
 </script></body></html>
