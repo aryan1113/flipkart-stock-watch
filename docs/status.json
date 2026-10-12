@@ -9,7 +9,7 @@
   "expense": 2000,
   "personal": 4000
  },
- "updated": "2026-10-12T16:19:07Z",
+ "updated": "2026-10-12T16:24:04Z",
  "items": [
   {
    "name": "Puma Palermo (Sea Illusion-Buttercream)",
@@ -24,7 +24,7 @@
    "rank": 5,
    "track_only": false,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:23Z",
+   "checked": "2026-10-12T16:23:17Z",
    "title": "PUMA Palermo Sneakers For Men",
    "sizes": {
     "6": false,
@@ -59,7 +59,7 @@
    "rank": 6,
    "track_only": false,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:27Z",
+   "checked": "2026-10-12T16:23:22Z",
    "title": "PUMA Club II Era Sneakers For Men",
    "sizes": {
     "6": false,
@@ -98,7 +98,7 @@
    "rank": 2,
    "track_only": false,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:33Z",
+   "checked": "2026-10-12T16:23:29Z",
    "title": "PUMA RX 737 Vintage Update Sneakers For Men",
    "sizes": {
     "6": false,
@@ -137,7 +137,7 @@
    "rank": null,
    "track_only": true,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:37Z",
+   "checked": "2026-10-12T16:23:33Z",
    "title": "PUMA 9-T Sneakers For Men",
    "sizes": {
     "6": false,
@@ -183,7 +183,7 @@
    "rank": null,
    "track_only": true,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:40Z",
+   "checked": "2026-10-12T16:23:38Z",
    "title": "PUMA ST Runner v4 Mesh Sneakers For Men",
    "sizes": {
     "6": false,
@@ -194,13 +194,13 @@
     "8.5": false,
     "9": false,
     "9.5": false,
-    "10": true,
+    "10": false,
     "10.5": false,
     "11": false,
     "12": false,
     "13": false
    },
-   "in_stock": true,
+   "in_stock": false,
    "error": null,
    "price": 2067,
    "mrp": 6499,
@@ -228,7 +228,7 @@
    "rank": 1,
    "track_only": false,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:45Z",
+   "checked": "2026-10-12T16:23:42Z",
    "title": "PUMA Palermo Sneakers For Men",
    "sizes": {
     "3": true,
@@ -271,7 +271,7 @@
    "rank": null,
    "track_only": false,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:49Z",
+   "checked": "2026-10-12T16:23:46Z",
    "title": "PUMA Palermo Supertifo Sneakers For Men",
    "sizes": {
     "3": true,
@@ -291,7 +291,7 @@
    "mrp": 7999,
    "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/w/4/s/-watermarked-original-imahg3udyc82jujh.jpeg",
    "photos": [],
-   "photos_ts": 1791821930.6089349
+   "photos_ts": 1791822228.2561376
   },
   {
    "name": "Puma Palermo Lth (white)",
@@ -306,7 +306,7 @@
    "rank": 3,
    "track_only": false,
    "offers_as_of": null,
-   "checked": "2026-10-12T16:18:53Z",
+   "checked": "2026-10-12T16:23:51Z",
    "title": "PUMA Palermo Lth Sneakers For Men",
    "sizes": {
     "6": false,
@@ -325,7 +325,7 @@
    },
    "in_stock": false,
    "error": null,
-   "price": 4138,
+   "price": 3699,
    "mrp": 6999,
    "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/n/y/e/-watermarked-original-imahg3ux9fyqf6pz.jpeg",
    "photos": [
@@ -351,7 +351,7 @@
    "rank": null,
    "track_only": false,
    "offers_as_of": "2026-10-12",
-   "checked": "2026-10-12T16:18:58Z",
+   "checked": "2026-10-12T16:23:55Z",
    "title": "PUMA RX 737 B&amp;B Sneakers Sneakers For Unisex",
    "sizes": {
     "3": false,
@@ -380,7 +380,7 @@
    "mrp": 8999,
    "image": "https://rukminim2.flixcart.com/image/1500/1500/xif0q/shoe/z/9/i/-original-imahrrjmzmsy4nz5.jpeg",
    "photos": [],
-   "photos_ts": 1791821939.8239331
+   "photos_ts": 1791822236.9369185
   },
   {
    "name": "Puma Palermo Lth Res (white/blue horizon)",
@@ -395,7 +395,7 @@
    "rank": 4,
    "track_only": false,
    "offers_as_of": "2026-10-12",
-   "checked": "2026-10-12T16:19:02Z",
+   "checked": "2026-10-12T16:23:59Z",
    "title": "PUMA Palermo Lth Res Sneakers For Men",
    "sizes": {
     "6": true,
